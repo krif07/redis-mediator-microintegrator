@@ -2,9 +2,11 @@
 <api context="/save" name="callClassMediator" xmlns="http://ws.apache.org/ns/synapse">
     <resource methods="POST">
         <inSequence>
-            <log>
-                <property name="xxxxxxxxRESPUESTAxxxxxxxxx" value="Inicia callClassMediator"/>
-            </log>
+            <redis.init>
+                <redisHost>{$ctx:redisHost}</redisHost>
+                <redisPort>{$ctx:redisPort}</redisPort>
+                <redisTimeout>{$ctx:redisTimeout}</redisTimeout>
+            </redis.init>
             <sequence key="callClassMediatorSeq"/>
             <respond/>
         </inSequence>
