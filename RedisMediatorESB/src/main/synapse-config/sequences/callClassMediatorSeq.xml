@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="callClassMediatorSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="BONONAME" scope="default" type="STRING" value="nombre del bono"/>
+    <class name="com.telefonica.mediator.BonosMediator">
+        <property name="codigo" value="cod del bono"/>
+    </class>
+    <log>
+        <property expression="$ctx:CONVERTED" name="RESPUESTA"/>
+    </log>
+</sequence>
