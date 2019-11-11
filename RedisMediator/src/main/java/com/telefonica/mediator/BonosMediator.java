@@ -10,11 +10,12 @@ public class BonosMediator extends AbstractMediator {
 	private Log log = LogFactory.getLog(BonosMediator.class);  
 	private String codigo;
 	
-	private String redisHost = "redis-13973.c61.us-east-1-3.ec2.cloud.redislabs.com";
-	private Integer redisPort = 13973;
-	private Integer redisTimeout = 3600;
-	private String redisPassword = "qkW6SKVi7XZeWAwucxkB4rcu065AEu2r";
-	private String redisMessage = "MENSAJE DE REDIS";
+	private String redisHost;
+	private String redisPort;
+	private String redisPassword;
+	private String redisJedisPoolMaxTotal;
+	private String redisJedisPoolMaxIdle;
+	private String redisJedisPoolMinIdle;
 	
 	public boolean mediate(MessageContext context) { 
 		saveBonosInRedis(context);
@@ -26,8 +27,7 @@ public class BonosMediator extends AbstractMediator {
 		log.debug("------------------ Inicio del servicio save ---------------");
 		
 		context.setProperty("redisHost",getRedisHost());
-		context.setProperty("redisPort",getRedisPort());
-		context.setProperty("redisTimeout",getRedisTimeout());
+		context.setProperty("redisPort",getRedisPort());		
 		context.setProperty("redisPassword",getRedisPassword());
 		
 		log.debug("-------------------- Fin del servicio save ------------------");
@@ -58,20 +58,12 @@ public class BonosMediator extends AbstractMediator {
 		this.redisHost = redisHost;
 	}
 
-	public Integer getRedisPort() {
+	public String getRedisPort() {
 		return redisPort;
 	}
 
-	public void setRedisPort(Integer redisPort) {
+	public void setRedisPort(String redisPort) {
 		this.redisPort = redisPort;
-	}
-
-	public Integer getRedisTimeout() {
-		return redisTimeout;
-	}
-
-	public void setRedisTimeout(Integer redisTimeout) {
-		this.redisTimeout = redisTimeout;
 	}
 
 	public String getRedisPassword() {
@@ -82,11 +74,29 @@ public class BonosMediator extends AbstractMediator {
 		this.redisPassword = redisPassword;
 	}
 
-	public String getRedisMessage() {
-		return redisMessage;
+	public String getRedisJedisPoolMaxTotal() {
+		return redisJedisPoolMaxTotal;
 	}
 
-	public void setRedisMessage(String redisMessage) {
-		this.redisMessage = redisMessage;
+	public void setRedisJedisPoolMaxTotal(String redisJedisPoolMaxTotal) {
+		this.redisJedisPoolMaxTotal = redisJedisPoolMaxTotal;
 	}
+
+	public String getRedisJedisPoolMaxIdle() {
+		return redisJedisPoolMaxIdle;
+	}
+
+	public void setRedisJedisPoolMaxIdle(String redisJedisPoolMaxIdle) {
+		this.redisJedisPoolMaxIdle = redisJedisPoolMaxIdle;
+	}
+
+	public String getRedisJedisPoolMinIdle() {
+		return redisJedisPoolMinIdle;
+	}
+
+	public void setRedisJedisPoolMinIdle(String redisJedisPoolMinIdle) {
+		this.redisJedisPoolMinIdle = redisJedisPoolMinIdle;
+	}
+
+		
 }

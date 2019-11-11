@@ -3,8 +3,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry kind="var" path="ECLIPSE_WORKSPACE/.metadata/.plugins/org.wso2.developerstudio.eclipse.libraries/lib/commons-logging-1.1.jar"/>
-	<classpathentry kind="var" path="ECLIPSE_WORKSPACE/.metadata/.plugins/org.wso2.developerstudio.eclipse.libraries/lib/synapse-core_2.1.7.wso2v111.jar"/>
-	<classpathentry kind="var" path="ECLIPSE_WORKSPACE/.metadata/.plugins/org.wso2.developerstudio.eclipse.libraries/lib/synapse-commons_2.1.7.wso2v111.jar"/>
+	<classpathentry exported="true" kind="var" path="ECLIPSE_WORKSPACE/.metadata/.plugins/org.wso2.developerstudio.eclipse.libraries/lib/commons-logging-1.1.jar"/>
+	<classpathentry exported="true" kind="var" path="ECLIPSE_WORKSPACE/.metadata/.plugins/org.wso2.developerstudio.eclipse.libraries/lib/synapse-core_2.1.7.wso2v111.jar"/>
+	<classpathentry exported="true" kind="var" path="ECLIPSE_WORKSPACE/.metadata/.plugins/org.wso2.developerstudio.eclipse.libraries/lib/synapse-commons_2.1.7.wso2v111.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_WORKSPACE/.metadata/.plugins/org.wso2.developerstudio.eclipse.libraries/lib/axiom_1.2.11.wso2v11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/krif0/Desktop/commons-pool2-2.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/krif0/Desktop/jedis-3.1.0.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_WORKSPACE/.metadata/.plugins/org.wso2.developerstudio.eclipse.libraries/lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="output" path="target"/>
 </classpath>

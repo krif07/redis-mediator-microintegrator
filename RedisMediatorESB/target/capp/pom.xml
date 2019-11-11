@@ -10,6 +10,7 @@
   <description>RedisMediatorESB_module</description>
   <modules>
     <module>artifacts\sequence\callClassMediatorSeq</module>
+    <module>artifacts\sequence\RedisSeq</module>
     <module>artifacts\api\callClassMediator</module>
   </modules>
 </project>

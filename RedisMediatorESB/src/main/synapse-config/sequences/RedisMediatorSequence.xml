@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="RedisMediatorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="redis.server.host" scope="default" type="STRING" value="redis-13973.c61.us-east-1-3.ec2.cloud.redislabs.com"/>
+    <property name="redis.server.port" scope="default" type="STRING" value="13973"/>
+    <property name="redis.server.timeout" scope="default" type="STRING" value="360"/>
+    <property name="redis.server.password" scope="default" type="STRING" value="qkW6SKVi7XZeWAwucxkB4rcu065AEu2r"/>
+    <property name="redis.server.database" scope="default" type="STRING" value="0"/>
+    <property name="redis.server.maxTotal" scope="default" type="STRING" value="6"/>
+    <property name="redis.server.maxIdle" scope="default" type="STRING" value="8"/>
+    <property name="redis.server.minIdle" scope="default" type="STRING" value="4"/>
+    <property name="redis.key.set" scope="default" type="STRING" value="id:1"/>
+    <property name="redis.value.set" scope="default" type="STRING" value="{&quot;id&quot;:1, &quot;nombre&quot;:&quot;Cristian Davila&quot;, &quot;precio&quot;:22.3, &quot;createAt&quot;:&quot;12-02-2019&quot;}"/>
+    <class name="com.telefonica.mediator.RedisClassMediator"/>
+    <log>
+        <property name="HOST" value="------ host ------------------"/>
+    </log>
+</sequence>

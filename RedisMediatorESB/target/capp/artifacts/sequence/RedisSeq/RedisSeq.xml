@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="RedisSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <redis.init>
+        <redisHost>redis-13973.c61.us-east-1-3.ec2.cloud.redislabs.com</redisHost>
+        <redisPort>13973</redisPort>
+        <redisTimeout>3600</redisTimeout>
+    </redis.init>
+</sequence>
