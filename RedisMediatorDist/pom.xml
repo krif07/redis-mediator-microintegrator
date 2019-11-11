@@ -17,7 +17,7 @@
   <properties>
     <com.example.redis.mediator-esb.sequence_._RedisRequestSeq>capp/EnterpriseServiceBus</com.example.redis.mediator-esb.sequence_._RedisRequestSeq>
     <com.example.redis.mediator-esb.api_._callClassMediator>capp/EnterpriseServiceBus</com.example.redis.mediator-esb.api_._callClassMediator>
-    <com.example.redis.mediator-esb.sequence_._callClassMediatorSeq>capp/EnterpriseServiceBus</com.example.redis.mediator-esb.sequence_._callClassMediatorSeq>
+    
     <redis.clients_._jedis>capp/ApplicationServer</redis.clients_._jedis>
     <com.example.redis.mediator-esb.sequence_._RedisMediatorSequence>capp/EnterpriseServiceBus</com.example.redis.mediator-esb.sequence_._RedisMediatorSequence>
     <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
@@ -30,13 +30,7 @@
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
-    <dependency>
-      <groupId>com.example.redis.mediator-esb.sequence</groupId>
-      <artifactId>callClassMediatorSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
+        <dependency>
       <groupId>com.telefonica.mediator.RedisMediator</groupId>
       <artifactId>RedisMediator</artifactId>
       <version>1.0.0</version>

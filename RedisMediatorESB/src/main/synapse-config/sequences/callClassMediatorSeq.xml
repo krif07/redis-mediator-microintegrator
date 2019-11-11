@@ -1,17 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="callClassMediatorSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <property name="BONONAME" scope="default" type="STRING" value="nombre del bono"/>
-    <class name="com.telefonica.mediator.BonosMediator">
-        <property name="codigo" value="cod del bono"/>
-        <property name="redisHost" value="edis-13973.c61.us-east-1-3.ec2.cloud.redislabs.com"/>
-        <property name="redisPort" value="13973"/>
-        <property name="redisPassword" value="qkW6SKVi7XZeWAwucxkB4rcu065AEu2r"/>
-        <property name="redisJedisPoolMaxTotal" value="6"/>
-        <property name="redisJedisPoolMaxIdle" value="8"/>
-        <property name="redisJedisPoolMinIdle" value="4"/>
-    </class>
-    <log>
-        <property expression="$ctx:CONVERTED" name="RESPUESTA"/>
-        <property expression="$ctx:redisHost" name="HOST"/>
-    </log>
-</sequence>
+<sequence name="callClassMediatorSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse"/>
