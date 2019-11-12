@@ -9,11 +9,12 @@
         <property name="redis.server.maxTotal" scope="default" type="STRING" value="6"/>
         <property name="redis.server.maxIdle" scope="default" type="STRING" value="8"/>
         <property name="redis.server.minIdle" scope="default" type="STRING" value="4"/>
-        <property name="redis.key.set" scope="default" type="STRING" value="id:3"/>
-        <property name="redis.value.set" scope="default" type="STRING" value="{&quot;id&quot;:3, &quot;nombre&quot;:&quot;Alguien mas Davila&quot;, &quot;precio&quot;:22.3, &quot;createAt&quot;:&quot;12-02-2019&quot;}"/>
+        <property name="redis.key.set" scope="default" type="STRING" value="id:6"/>
+        <property name="redis.value.set" scope="default" type="STRING" value="{&quot;id&quot;:6, &quot;nombre&quot;:&quot;Est3e nombre va&quot;, &quot;precio&quot;:22.3, &quot;createAt&quot;:&quot;12-02-2019&quot;}"/>
     </propertyGroup>
     <class name="com.telefonica.mediator.RedisClassMediator"/>
     <log>
-        <property expression="get-property('redis.value.get')" name="redis-get-value"/>
+        <property expression="get-property('redis.value.set')" name="redis-set-value"/>
+        <property name="messageType" value="application/json"/>
     </log>
 </sequence>

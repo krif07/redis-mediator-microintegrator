@@ -9,11 +9,13 @@
         <property name="redis.server.maxTotal" scope="default" type="STRING" value="6"/>
         <property name="redis.server.maxIdle" scope="default" type="STRING" value="8"/>
         <property name="redis.server.minIdle" scope="default" type="STRING" value="4"/>
-        <property name="redis.key.get" scope="default" type="STRING" value="id:3"/>
-        <property name="redis.value.get" scope="default" type="STRING" value="nombre"/>
+        <property expression="get-property('query.param.redisKeyGet')" name="redis.key.get" scope="default" type="STRING"/>
+        <property expression="get-property('query.param.redisValueGet')" name="redis.value.get" scope="default" type="STRING"/>
     </propertyGroup>
     <class name="com.telefonica.mediator.RedisClassMediator"/>
     <log>
+        <property expression="get-property('query.param.redisKeyGet')" name="parametro-redis-mediator-sequence-key"/>
+        <property expression="get-property('query.param.redisValueGet')" name="parametro-redis-mediator-sequence-value"/>
         <property expression="get-property('redis.value.get')" name="redis-get-value"/>
     </log>
 </sequence>
