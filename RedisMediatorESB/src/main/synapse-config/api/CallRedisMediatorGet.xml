@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api context="/bonos" name="CallRedisMediatorGet" xmlns="http://ws.apache.org/ns/synapse">
-    <resource methods="GET" uri-template="/get">
+    <resource methods="GET" uri-template="/get/{TIPO_BONO}">
         <inSequence>
             <log>
-                <property name="---------- LOG CALL CLASS MEDIATOR ---------" value="Inicia CallRedisMediatorGet"/>
-                <property expression="get-property('query.param.redisKeyGet')" name="parametro-call-redis-mediator-get"/>
+                <property name="---------- GET CLASS MEDIATOR ---------" value="Inicia CallRedisMediatorGet"/>
             </log>
             <sequence key="RedisMediatorSequence"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/post">
+        <inSequence>
+            <log>
+                <property name="---------- POST VALUES ---------" value="Inicia CallRedisMediatorGet"/>
+            </log>
+            <sequence key="RedisMediatorSetSequence"/>
             <respond/>
         </inSequence>
         <outSequence/>

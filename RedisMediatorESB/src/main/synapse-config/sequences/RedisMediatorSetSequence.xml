@@ -9,7 +9,7 @@
         <property name="redis.server.maxTotal" scope="default" type="STRING" value="6"/>
         <property name="redis.server.maxIdle" scope="default" type="STRING" value="8"/>
         <property name="redis.server.minIdle" scope="default" type="STRING" value="4"/>
-        <property name="redis.key.set" scope="default" type="STRING" value="id:9"/>
+        <property name="redis.key.set" scope="default" type="STRING" value="bonos1"/>
         <property expression="json-eval($.BONUSES.BONUS)" name="redis.value.set" scope="default" type="STRING"/>
     </propertyGroup>
     <!-- Construct the backend calling payload -->
