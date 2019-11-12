@@ -63,50 +63,12 @@ public class RedisClassMediator extends AbstractMediator {
 				isSet = true;
 			}
 
-			if (isGet) {
-				// Handle Redis GET Operations
-				String redisGetValue = jedis.get(redisGetKey);
-				// String redisGetValue = jedis.getrange(redisGetKey, 0, -1);
-				if (StringUtils.isNotEmpty(redisGetValue)) {
-					messageContext.setProperty(RedisClassMediatorConstants.REDIS_GET_VALUE, redisGetValue);
-					if (log.isDebugEnabled()) {
-						log.debug(String.format("Get [Key] %s and Get [Value] %s for [messageId] %s", redisGetKey,
-								redisGetValue, messageContext.getMessageID()));
-					}
-
-				} else {
-					log.warn(String.format("A Valid value for [key] %s not found in Redis for [messageId] %s",
-							redisGetKey, messageContext.getMessageID()));
-				}
-
-				// Removing property after use
-				if (pros != null) {
-					pros.remove(RedisClassMediatorConstants.REDIS_GET_KEY);
-				}
+			if (isGet) {				
+				getRedisOperation(messageContext, jedis, redisGetKey);				
+				
 			} else if (isSet) {
-				// Handle Redis PUT Operations
-				String status;
-				Object ttlValueObj = messageContext.getProperty(RedisClassMediatorConstants.REDIS_SET_TTL_VALUE);
-				if (ttlValueObj instanceof Integer) {
-					int redisSetTTLValue = (Integer) messageContext
-							.getProperty(RedisClassMediatorConstants.REDIS_SET_TTL_VALUE);
-					status = jedis.setex(redisSetKey, redisSetTTLValue, redisSetValue);
-				} else {
-					status = jedis.set(redisSetKey, redisSetValue);
-				}
-				messageContext.setProperty(RedisClassMediatorConstants.REDIS_SET_VALUE_STATUS, status);
-				if (log.isDebugEnabled()) {
-					log.debug(String.format("Set [Key] %s and Set [Value] %s for [messageId] %s", redisSetKey,
-							redisSetValue, messageContext.getMessageID()));
-				}
-				// Removing properties after usage
-				if (pros != null) {
-					pros.remove(RedisClassMediatorConstants.REDIS_SET_KEY);
-					pros.remove(RedisClassMediatorConstants.REDIS_SET_VALUE);
-					if (ttlValueObj != null) {
-						pros.remove(RedisClassMediatorConstants.REDIS_SET_TTL_VALUE);
-					}
-				}
+				setRedisOperation(messageContext, jedis, redisSetKey, redisSetValue);
+								
 			} else {
 				log.error("Cannot find required Redis GET or SET Properties, skipping Redis Mediator");
 			}
@@ -122,6 +84,59 @@ public class RedisClassMediator extends AbstractMediator {
 			}
 		}
 		return true;
+	}
+	
+	private void getRedisOperation(MessageContext messageContext, Jedis jedis, String redisGetKey){		
+		Set pros = messageContext.getPropertyKeySet();
+		// Handle Redis GET Operations
+		String redisGetValue = jedis.get(redisGetKey);
+		// String redisGetValue = jedis.getrange(redisGetKey, 0, -1);
+		if (StringUtils.isNotEmpty(redisGetValue)) {
+			messageContext.setProperty(RedisClassMediatorConstants.REDIS_GET_VALUE, redisGetValue);
+			if (log.isDebugEnabled()) {
+				log.debug(String.format("Get [Key] %s and Get [Value] %s for [messageId] %s", redisGetKey,
+						redisGetValue, messageContext.getMessageID()));
+			}
+
+		} else {
+			log.warn(String.format("A Valid value for [key] %s not found in Redis for [messageId] %s",
+					redisGetKey, messageContext.getMessageID()));
+		}
+		
+		// Removing property after use
+		if (pros != null) {
+			pros.remove(RedisClassMediatorConstants.REDIS_GET_KEY);
+		}
+		
+	}
+	
+	private void setRedisOperation(MessageContext messageContext, Jedis jedis, String redisSetKey, String redisSetValue){
+		Set pros = messageContext.getPropertyKeySet();
+		
+		// Handle Redis PUT Operations
+		String status;
+		Object ttlValueObj = messageContext.getProperty(RedisClassMediatorConstants.REDIS_SET_TTL_VALUE);
+		if (ttlValueObj instanceof Integer) {
+			int redisSetTTLValue = (Integer) messageContext
+					.getProperty(RedisClassMediatorConstants.REDIS_SET_TTL_VALUE);
+			status = jedis.setex(redisSetKey, redisSetTTLValue, redisSetValue);
+		} else {
+			status = jedis.set(redisSetKey, redisSetValue);
+		}
+		messageContext.setProperty(RedisClassMediatorConstants.REDIS_SET_VALUE_STATUS, status);
+		if (log.isDebugEnabled()) {
+			log.debug(String.format("Set [Key] %s and Set [Value] %s for [messageId] %s", redisSetKey,
+					redisSetValue, messageContext.getMessageID()));
+		}
+		
+		// Removing properties after usage
+		if (pros != null) {
+			pros.remove(RedisClassMediatorConstants.REDIS_SET_KEY);
+			pros.remove(RedisClassMediatorConstants.REDIS_SET_VALUE);
+			if (ttlValueObj != null) {
+				pros.remove(RedisClassMediatorConstants.REDIS_SET_TTL_VALUE);
+			}
+		}
 	}
 
 	private Jedis getJedisObject(MessageContext messageContext) {
