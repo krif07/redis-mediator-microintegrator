@@ -113,6 +113,10 @@ public class RedisClassMediator extends AbstractMediator {
                     if (isGet) {
                         // Handle Redis GET Operations                        
                     	String redisGetValue = jedis.get(redisGetKey);
+                    	//String redisGetValue = jedis.getrange(redisGetKey, 0, -1);
+                    	log.debug("------------------------------------------------------------------------------------");
+                    	log.debug(redisGetValue);
+                    	log.debug("------------------------------------------------------------------------------------");
                         if (StringUtils.isNotEmpty(redisGetValue)) {
                             messageContext.setProperty(RedisClassMediatorConstants.REDIS_GET_VALUE, redisGetValue);
                             if (log.isDebugEnabled()) {

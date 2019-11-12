@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<api context="/save" name="callClassMediator" xmlns="http://ws.apache.org/ns/synapse">
-    <resource methods="POST">
-        <inSequence>
-            <log>
-                <property name="xxxxxxxxLOG CALL CLASS MEDIATOR xxxxxxxxx" value="Inicia callClassMediator"/>
-            </log>
-            <sequence key="RedisMediatorSequence"/>
-            <respond/>
-        </inSequence>
+<api context="/default" name="callClass" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence/>
         <outSequence/>
         <faultSequence/>
     </resource>

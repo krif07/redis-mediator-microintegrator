@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="RedisMediatorSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+<sequence name="RedisMediatorSetSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <propertyGroup>
         <property name="redis.server.host" scope="default" type="STRING" value="redis-13973.c61.us-east-1-3.ec2.cloud.redislabs.com"/>
         <property name="redis.server.port" scope="default" type="STRING" value="13973"/>
@@ -9,8 +9,8 @@
         <property name="redis.server.maxTotal" scope="default" type="STRING" value="6"/>
         <property name="redis.server.maxIdle" scope="default" type="STRING" value="8"/>
         <property name="redis.server.minIdle" scope="default" type="STRING" value="4"/>
-        <property name="redis.key.get" scope="default" type="STRING" value="id:3"/>
-        <property name="redis.value.get" scope="default" type="STRING" value="nombre"/>
+        <property name="redis.key.set" scope="default" type="STRING" value="id:3"/>
+        <property name="redis.value.set" scope="default" type="STRING" value="{&quot;id&quot;:3, &quot;nombre&quot;:&quot;Alguien mas Davila&quot;, &quot;precio&quot;:22.3, &quot;createAt&quot;:&quot;12-02-2019&quot;}"/>
     </propertyGroup>
     <class name="com.telefonica.mediator.RedisClassMediator"/>
     <log>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/set" name="CallRedisMediatorSet" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST">
+        <inSequence>
+            <log>
+                <property name="---------- SET VALUES ---------" value="Inicia CallRedisMediatorSet"/>
+            </log>
+            <sequence key="RedisMediatorSetSequence"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>
