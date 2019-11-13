@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api context="/bonos" name="CallRedisMediatorGet" xmlns="http://ws.apache.org/ns/synapse">
-    <resource methods="GET" uri-template="/get/{TIPO_BONO}">
+    <resource methods="POST" uri-template="/get">
         <inSequence>
             <log>
                 <property name="---------- GET CLASS MEDIATOR ---------" value="Inicia CallRedisMediatorGet"/>

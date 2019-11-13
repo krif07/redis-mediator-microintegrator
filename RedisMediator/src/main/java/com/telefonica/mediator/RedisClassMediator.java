@@ -151,8 +151,9 @@ public class RedisClassMediator extends AbstractMediator {
 		log.warn(redisGetKey);
 		Set pros = messageContext.getPropertyKeySet();
 		// Handle Redis GET Operations
-//		Map<String, String> fields = jedis.hmget("bonos1", redisGetKey);
-		List<String> redisGetValue = jedis.hmget("bonos1", redisGetKey);
+
+		String[] strArray = redisGetKey.split(",");
+		List<String> redisGetValue = jedis.hmget("bonos1", strArray);
 		log.warn(redisGetValue);
 		/*if (StringUtils.isNotEmpty(redisGetValue)) {
 			messageContext.setProperty(RedisClassMediatorConstants.REDIS_GET_VALUE, redisGetValue);

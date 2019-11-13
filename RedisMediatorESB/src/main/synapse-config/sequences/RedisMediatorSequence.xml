@@ -9,7 +9,7 @@
         <property name="redis.server.maxTotal" scope="default" type="STRING" value="6"/>
         <property name="redis.server.maxIdle" scope="default" type="STRING" value="8"/>
         <property name="redis.server.minIdle" scope="default" type="STRING" value="4"/>
-        <property expression="get-property('uri.var.TIPO_BONO')" name="redis.key.get" scope="default" type="STRING"/>
+        <property expression="json-eval($.TIPO_BONO)" name="redis.key.get" scope="default" type="STRING"/>
         <property expression="get-property('uri.var.TIPO_BONO')" name="redis.value.get" scope="default" type="STRING"/>
     </propertyGroup>
     <class name="com.telefonica.mediator.RedisClassMediator"/>
