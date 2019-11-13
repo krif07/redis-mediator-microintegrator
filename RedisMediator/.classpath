@@ -10,5 +10,6 @@
 	<classpathentry kind="var" path="ECLIPSE_WORKSPACE/.metadata/.plugins/org.wso2.developerstudio.eclipse.libraries/lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="F:/Proyectos/Indra/Telefónica Ecuador/ws_redis/descargas/jedis-3.1.0.jar"/>
 	<classpathentry kind="lib" path="F:/Proyectos/Indra/Telefónica Ecuador/ws_redis/descargas/commons-pool2-2.7.0.jar"/>
+	<classpathentry kind="lib" path="F:/Proyectos/Indra/Telefónica Ecuador/ws_redis/descargas/json-20190722.jar"/>
 	<classpathentry kind="output" path="target"/>
 </classpath>

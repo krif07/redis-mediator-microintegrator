@@ -12,6 +12,12 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /** * Redis Class Mediator * Supports GET / SET Operations */
@@ -47,6 +53,7 @@ public class RedisClassMediator extends AbstractMediator {
 			jedis.connect();
 
 			String redisGetKey = (String) messageContext.getProperty(RedisClassMediatorConstants.REDIS_GET_KEY);
+			
 			if (StringUtils.isNotEmpty(redisGetKey)) {
 				isGet = true;
 			}
@@ -64,10 +71,10 @@ public class RedisClassMediator extends AbstractMediator {
 			}
 
 			if (isGet) {				
-				getRedisOperation(messageContext, jedis, redisGetKey);				
+				hgetRedisOperation(messageContext, jedis, redisGetKey);				
 				
 			} else if (isSet) {
-				setRedisOperation(messageContext, jedis, redisSetKey, redisSetValue);
+				hsetRedisOperation(messageContext, jedis, redisSetKey, redisSetValue);
 								
 			} else {
 				log.error("Cannot find required Redis GET or SET Properties, skipping Redis Mediator");
@@ -136,6 +143,61 @@ public class RedisClassMediator extends AbstractMediator {
 			if (ttlValueObj != null) {
 				pros.remove(RedisClassMediatorConstants.REDIS_SET_TTL_VALUE);
 			}
+		}
+	}
+	
+	private void hgetRedisOperation(MessageContext messageContext, Jedis jedis, String redisGetKey){
+		log.warn("---------------------------------------------------------- hget--------------------------------------");
+		log.warn(redisGetKey);
+		Set pros = messageContext.getPropertyKeySet();
+		// Handle Redis GET Operations
+//		Map<String, String> fields = jedis.hmget("bonos1", redisGetKey);
+		List<String> redisGetValue = jedis.hmget("bonos1", redisGetKey);
+		log.warn(redisGetValue);
+		/*if (StringUtils.isNotEmpty(redisGetValue)) {
+			messageContext.setProperty(RedisClassMediatorConstants.REDIS_GET_VALUE, redisGetValue);
+			if (log.isDebugEnabled()) {
+				log.debug(String.format("Get [Key] %s and Get [Value] %s for [messageId] %s", redisGetKey,
+						redisGetValue, messageContext.getMessageID()));
+			}			
+
+		} else {
+			log.warn(String.format("A Valid value for [key] %s not found in Redis for [messageId] %s",
+					redisGetKey, messageContext.getMessageID()));
+		}*/
+		
+		// Removing property after use
+		if (pros != null) {
+			pros.remove(RedisClassMediatorConstants.REDIS_GET_KEY);
+		}
+		
+	}
+	
+	private void hsetRedisOperation(MessageContext messageContext, Jedis jedis, String redisSetKey, String redisSetValue){
+		Set pros = messageContext.getPropertyKeySet();
+		// Handle Redis PUT Operations
+				
+		/*messageContext.setProperty(RedisClassMediatorConstants.REDIS_SET_VALUE_STATUS, status);
+		if (log.isDebugEnabled()) {
+			log.debug(String.format("Set [Key] %s and Set [Value] %s for [messageId] %s", redisSetKey,
+					redisSetValue, messageContext.getMessageID()));
+		}*/
+		JSONObject dataJsonObject = new JSONObject(redisSetValue);
+		
+		JSONArray dataArray = dataJsonObject.getJSONArray("BONUS");
+		for (int i = 0; i < dataArray.length(); i++) {
+			JSONObject fila = (JSONObject) dataArray.get(i);
+			Map<String, String> values = new HashMap<String, String>();
+			
+			values.put(fila.getString("TIPO_BONO"), fila.toString());
+			//log.warn(redisSetKey +"-"+ fila.getString("TIPO_BONO").toString() +"-"+ fila.toString());
+			jedis.hset(redisSetKey, values);						
+		}
+		
+		// Removing properties after usage
+		if (pros != null) {
+			pros.remove(RedisClassMediatorConstants.REDIS_SET_KEY);
+			pros.remove(RedisClassMediatorConstants.REDIS_SET_VALUE);			
 		}
 	}
 
