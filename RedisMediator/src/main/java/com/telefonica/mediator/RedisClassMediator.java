@@ -15,10 +15,14 @@ import redis.clients.jedis.JedisPoolConfig;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /** * Redis Class Mediator * Supports GET / SET Operations */
 public class RedisClassMediator extends AbstractMediator {
@@ -186,14 +190,46 @@ public class RedisClassMediator extends AbstractMediator {
 		JSONObject dataJsonObject = new JSONObject(redisSetValue);
 		
 		JSONArray dataArray = dataJsonObject.getJSONArray("BONUS");
-		for (int i = 0; i < dataArray.length(); i++) {
+		
+		ArrayList<JSONObject> list = new ArrayList<>();
+
+        for (int i = 0; i < dataArray.length(); i++) {
+            list.add((JSONObject) dataArray.get(i));
+        }
+        
+        Collections.sort(list, new MyJSONComparator());
+		
+        ArrayList<JSONObject> groupList = new ArrayList<>();
+        JSONObject objAnt = list.get(0);        		
+        String tipoBonoAnt = objAnt.getString("TIPO_BONO");
+                
+        for (JSONObject obj : list) {
+        	
+        	if(!tipoBonoAnt.equals(obj.getString("TIPO_BONO"))) {
+        		jedis.hset(redisSetKey, tipoBonoAnt, groupList.toString());
+        		//log.warn(redisSetKey + "-" + tipoBonoAnt + "-" + groupList.toString());
+        		tipoBonoAnt = obj.getString("TIPO_BONO");
+        		groupList = new ArrayList<>();
+        	}
+        	
+        	groupList.add(obj);
+
+            //log.warn(redisSetKey +"-"+ obj.get("TIPO_BONO").toString() +"-"+ obj.toString());            
+        }
+        
+        jedis.hset(redisSetKey, tipoBonoAnt, groupList.toString());
+        log.warn(redisSetKey + "-" + tipoBonoAnt + "-" + groupList.toString());
+        
+        //Map<String, List<JSONObject>> postsPerType = list.stream().collect(Collectors.groupingBy(JSONArray.get("TIPO_BONO"), Collectors.toSet()));
+        
+		/*for (int i = 0; i < dataArray.length(); i++) {
 			JSONObject fila = (JSONObject) dataArray.get(i);
 			Map<String, String> values = new HashMap<String, String>();
 			
 			values.put(fila.getString("TIPO_BONO"), fila.toString());
 			//log.warn(redisSetKey +"-"+ fila.getString("TIPO_BONO").toString() +"-"+ fila.toString());
 			jedis.hset(redisSetKey, values);						
-		}
+		}*/
 		
 		// Removing properties after usage
 		if (pros != null) {
@@ -201,6 +237,7 @@ public class RedisClassMediator extends AbstractMediator {
 			pros.remove(RedisClassMediatorConstants.REDIS_SET_VALUE);			
 		}
 	}
+		
 
 	private Jedis getJedisObject(MessageContext messageContext) {
 
@@ -399,6 +436,17 @@ public class RedisClassMediator extends AbstractMediator {
 			registryResourceContent = ((OMTextImpl) obj).getText();
 		}
 		return registryResourceContent;
+	}
+
+}
+
+class MyJSONComparator implements Comparator<JSONObject> {
+
+	@Override
+	public int compare(JSONObject o1, JSONObject o2) {
+	    String v1 = (String) o1.get("TIPO_BONO");
+	    String v3 = (String) o2.get("TIPO_BONO");
+	    return v1.compareTo(v3);
 	}
 
 }

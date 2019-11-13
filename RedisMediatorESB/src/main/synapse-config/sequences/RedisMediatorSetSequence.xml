@@ -3,7 +3,7 @@
     <propertyGroup>
         <property name="redis.server.host" scope="default" type="STRING" value="redis-13973.c61.us-east-1-3.ec2.cloud.redislabs.com"/>
         <property name="redis.server.port" scope="default" type="STRING" value="13973"/>
-        <property name="redis.server.timeout" scope="default" type="STRING" value="36000"/>
+        <property name="redis.server.timeout" scope="default" type="STRING" value="120000"/>
         <property name="redis.server.password" scope="default" type="STRING" value="qkW6SKVi7XZeWAwucxkB4rcu065AEu2r"/>
         <property name="redis.server.database" scope="default" type="STRING" value="0"/>
         <property name="redis.server.maxTotal" scope="default" type="STRING" value="6"/>
