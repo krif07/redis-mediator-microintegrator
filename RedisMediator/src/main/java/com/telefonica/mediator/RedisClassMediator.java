@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /** * Redis Class Mediator * Supports GET / SET Operations */
@@ -197,7 +198,19 @@ public class RedisClassMediator extends AbstractMediator {
             list.add((JSONObject) dataArray.get(i));
         }
         
-        Collections.sort(list, new MyJSONComparator());
+        Map<String, List<JSONObject>> bonosByTipoBono = list.stream().collect(Collectors.groupingBy(
+    		e -> e.getString("TIPO_BONO")
+    	));
+    
+        log.warn("------------------------------------------------------------------------");
+        for(Map.Entry<String, List<JSONObject>> bono : bonosByTipoBono.entrySet()) {
+        	jedis.hset(redisSetKey, bono.getKey(), bono.getValue().toString());
+        	//log.warn(bono.getKey() + " - " + bono.getValue());
+        }                
+        log.warn("------------------------------------------------------------------------");
+    	//log.warn(bonosByTipoBono);
+        
+        /*Collections.sort(list, new MyJSONComparator());
 		
         ArrayList<JSONObject> groupList = new ArrayList<>();
         JSONObject objAnt = list.get(0);        		
@@ -218,9 +231,9 @@ public class RedisClassMediator extends AbstractMediator {
         }
         
         jedis.hset(redisSetKey, tipoBonoAnt, groupList.toString());
-        log.warn(redisSetKey + "-" + tipoBonoAnt + "-" + groupList.toString());
+        log.warn(redisSetKey + "-" + tipoBonoAnt + "-" + groupList.toString());*/
         
-        //Map<String, List<JSONObject>> postsPerType = list.stream().collect(Collectors.groupingBy(JSONArray.get("TIPO_BONO"), Collectors.toSet()));
+       
         
 		/*for (int i = 0; i < dataArray.length(); i++) {
 			JSONObject fila = (JSONObject) dataArray.get(i);
